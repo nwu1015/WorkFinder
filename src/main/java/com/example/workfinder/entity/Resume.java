@@ -3,6 +3,7 @@ package com.example.workfinder.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @Builder
+@ToString
 public class Resume {
 
     private User worker;

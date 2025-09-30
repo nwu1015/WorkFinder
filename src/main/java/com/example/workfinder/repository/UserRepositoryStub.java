@@ -2,12 +2,14 @@ package com.example.workfinder.repository;
 
 import com.example.workfinder.entity.User;
 import com.example.workfinder.entity.UserRole;
+import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Repository
 public class UserRepositoryStub {
     private final List<User> users = new ArrayList<>();
@@ -51,10 +53,6 @@ public class UserRepositoryStub {
                 .build()
 
         );
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 
     public void addUser(User user) {

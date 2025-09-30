@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагування вакансії</title>
+</head>
+<body>
+<h1>Редагування вакансії</h1>
+
+<form th:action="@{/editVacancy}" method="post" th:object="${vacancy}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="nameOfVacancy">Назва вакансії:</label><br>
+    <input type="text" id="nameOfVacancy" th:field="*{nameOfVacancy}" required/><br><br>
+
+    <label for="requirements">Вимоги:</label><br>
+    <textarea id="requirements" th:field="*{requirements}" rows="3" cols="50"></textarea><br><br>
+
+    <label for="salary">Зарплата:</label><br>
+    <input type="number" id="salary" th:field="*{salary}"/><br><br>
+
+    <label for="location">Локація:</label><br>
+    <input type="text" id="location" th:field="*{location}"/><br><br>
+
+    <label for="employmentType">Тип зайнятості:</label><br>
+    <input type="text" id="employmentType" th:field="*{employmentType}"/><br><br>
+
+    <label for="experience">Досвід:</label><br>
+    <input type="text" id="experience" th:field="*{experience}"/><br><br>
+
+    <label for="description">Опис:</label><br>
+    <textarea id="description" th:field="*{description}" rows="4" cols="50"></textarea><br><br>
+
+    <label for="active">Активна:</label>
+    <input type="checkbox" id="active" th:field="*{active}"/><br><br>
+
+    <button type="submit">Зберегти</button>
+</form>
+</body>
+</html>

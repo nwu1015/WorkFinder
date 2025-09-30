@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:switch="${#lists.size(vacancyList)}">
+    <div th:case="0">No vacancies are active</div>
+    <div th:case="1">
+        <div th:text="${'One vacancy is active: ' +  vacancyList.get(0)}"></div>
+        <form th:action="@{/deleteVacancy/{id}(id=${vacancyList[0].id})}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+
+        <form th:action="@{/editVacancy/{id}(id=${vacancyList[0].id})}" method="get">
+            <button type="submit">Edit</button>
+        </form>
+
+    </div>
+    <div th:case="*">
+        Vacancies:
+        <div th:each="vacancy:${vacancyList}">
+
+            <div th:text="${vacancy.getId()}"></div>
+
+            <div th:text="${vacancy + ' ' + vacancy.getId()}"></div>
+            <form th:action="@{/deleteVacancy/{id}(id=${vacancy.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+
+            <form th:action="@{/editVacancy/{id}(id=${vacancy.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<form action="/createVacancy" method="post">
+    <label>
+        Назва вакансії
+        <input name="nameOfVacancy" type="text" required maxlength="200" />
+    </label>
+
+    <label>
+        Вимоги
+        <textarea name="requirements" rows="4" maxlength="2000"></textarea>
+    </label>
+
+    <label>
+        Зарплата (ціле число)
+        <input name="salary" type="number" step="1" min="0" />
+    </label>
+
+    <label>
+        Локація
+        <input name="location" type="text" maxlength="200" />
+    </label>
+
+    <label>
+        Тип зайнятості
+        <select name="employmentType">
+            <option value="">-- оберіть --</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Remote">Remote</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+        </select>
+    </label>
+
+    <label>
+        Досвід
+        <select name="experience">
+            <option value="">-- оберіть --</option>
+            <option value="No experience">Без досвіду</option>
+            <option value="1-2 years">1-2 роки</option>
+            <option value="3-5 years">3-5 років</option>
+            <option value="5+ years">5+ років</option>
+        </select>
+    </label>
+
+    <label>
+        Опис
+        <textarea name="description" rows="6" maxlength="5000"></textarea>
+    </label>
+
+    <button type="submit">Save</button>
+</form>
+
+
+<form action="/searchVacancies" method="get">
+    <input type="text" name="keyword" placeholder="Пошук вакансій..."
+           th:value="${keyword}" />
+    <button type="submit">Пошук</button>
+</form>
+
+
+</body>
+</html>
