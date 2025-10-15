@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід - WorkFinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .auth-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-wrapper {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .logo span {
+            color: #007bff;
+        }
+        .form-wrapper h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #495057;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-container">
+    <a href="/" class="logo">Work<span>Finder</span></a>
+    <div class="form-wrapper">
+        <h1>Вхід в акаунт</h1>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Ім'я користувача або Email</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="submit-btn">Увійти</button>
+        </form>
+        <div class="form-footer">
+            <p>Не маєте акаунту? <a href="/register.html">Зареєструватися</a></p>
+            <a href="/forgot-password">Забули пароль?</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

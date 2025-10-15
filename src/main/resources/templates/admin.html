@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель - WorkFinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+        .sidebar-header {
+            text-align: center;
+            padding: 0 20px 20px 20px;
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 1px solid #495057;
+        }
+        .sidebar-header a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .sidebar-header span {
+            color: #007bff;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .sidebar-nav li a {
+            display: block;
+            padding: 15px 20px;
+            color: #adb5bd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar-nav li a:hover, .sidebar-nav li a.active {
+            background-color: #495057;
+            color: #fff;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+        }
+        .content-header {
+            margin-bottom: 30px;
+        }
+        .content-header h1 {
+            font-size: 32px;
+            margin: 0;
+        }
+        .content-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .content-card h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            color: white;
+            margin-right: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .edit-btn { background-color: #17a2b8; }
+        .delete-btn { background-color: #dc3545; }
+        .block-btn { background-color: #ffc107; color: #212529; }
+    </style>
+</head>
+<body>
+<div class="admin-wrapper">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="/">Work<span>Finder</span></a>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#users" class="active">Керування користувачами</a></li>
+            <li><a href="#vacancies">Керування вакансіями</a></li>
+            <li><a href="/">Повернутись на сайт</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-header">
+            <h1>Панель адміністратора</h1>
+        </div>
+
+        <div id="users" class="content-card">
+            <h2>Список користувачів</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я користувача</th>
+                    <th>Email</th>
+                    <th>Роль</th>
+                    <th>Дії</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>admin_user</td>
+                    <td>admin@example.com</td>
+                    <td>ADMIN</td>
+                    <td>
+                        <button class="action-btn block-btn">Заблокувати</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>johndoe</td>
+                    <td>john.doe@example.com</td>
+                    <td>USER</td>
+                    <td>
+                        <button class="action-btn block-btn">Заблокувати</button>
+                        <button class="action-btn delete-btn">Видалити</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>company_hr</td>
+                    <td>hr@company.com</td>
+                    <td>EMPLOYER</td>
+                    <td>
+                        <button class="action-btn block-btn">Заблокувати</button>
+                        <button class="action-btn delete-btn">Видалити</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="vacancies" class="content-card">
+            <h2>Список усіх вакансій</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Назва вакансії</th>
+                    <th>Локація</th>
+                    <th>Статус</th>
+                    <th>Дії</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>Senior Java Developer</td>
+                    <td>Київ</td>
+                    <td>Активна</td>
+                    <td>
+                        <a href="#" class="action-btn edit-btn">Редагувати</a>
+                        <button class="action-btn delete-btn">Видалити</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Frontend Developer (React)</td>
+                    <td>Львів</td>
+                    <td>Неактивна</td>
+                    <td>
+                        <a href="#" class="action-btn edit-btn">Редагувати</a>
+                        <button class="action-btn delete-btn">Видалити</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>QA Engineer</td>
+                    <td>Віддалено</td>
+                    <td>Активна</td>
+                    <td>
+                        <a href="#" class="action-btn edit-btn">Редагувати</a>
+                        <button class="action-btn delete-btn">Видалити</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>

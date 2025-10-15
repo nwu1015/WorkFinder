@@ -69,4 +69,19 @@ public class WorkController {
                 .addObject("vacancyList", result)
                 .addObject("keyword", keyword);
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "admin";
+    }
+
+    @GetMapping("/test1")
+    public String test1() {
+        return "login";
+    }
+
+    @GetMapping("/test2")
+    public String test2() {
+        return "register";
+    }
 }

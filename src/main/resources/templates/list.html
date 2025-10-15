@@ -1,102 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список вакансій</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #212529;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #007bff;
+        }
+
+        .nav-links a {
+            margin-left: 25px;
+            font-weight: 500;
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .nav-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .page-header {
+            padding: 40px 0;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .page-header h1 {
+            margin-top: 0;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ced4da;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 0 30px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .vacancy-list-container {
+            padding: 40px 0;
+        }
+
+        .vacancy-card {
+            background-color: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .vacancy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .vacancy-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            color: #007bff;
+        }
+
+        .vacancy-salary {
+            font-size: 20px;
+            font-weight: 600;
+            color: #28a745;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+
+        .vacancy-details span {
+            margin-right: 20px;
+            color: #6c757d;
+        }
+
+        .vacancy-description {
+            margin-top: 15px;
+            color: #495057;
+        }
+
+        .card-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #138496;
+        }
+
+        .delete-btn {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            background-color: #dc3545;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .no-vacancies {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .no-vacancies h2 {
+            color: #6c757d;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #6c757d; /* Сірий за замовчуванням */
+        }
+
+        .badge.remote {
+            background-color: #17a2b8; /* Бірюзовий */
+        }
+
+        .badge.full-time {
+            background-color: #28a745; /* Зелений */
+        }
+
+        .badge.part-time {
+            background-color: #ffc107; /* Жовтий */
+            color: #212529;
+        }
+
+        .badge.contract {
+            background-color: #fd7e14; /* Помаранчевий */
+        }
+
+    </style>
 </head>
 <body>
 
-<div th:switch="${#lists.size(vacancyList)}">
-    <div th:case="0">No vacancies are active</div>
-    <div th:case="1">
-        <div th:text="${'One vacancy is active: ' +  vacancyList.get(0)}"></div>
-        <form th:action="@{/deleteVacancy/{id}(id=${vacancyList[0].id})}" method="post">
-            <button type="submit">Delete</button>
-        </form>
-
-        <form th:action="@{/editVacancy/{id}(id=${vacancyList[0].id})}" method="get">
-            <button type="submit">Edit</button>
-        </form>
-
+<header class="header">
+    <div class="container">
+        <a href="/" class="logo">Work<span>Finder</span></a>
+        <nav class="nav-links">
+            <a href="/getAllVacancies">Знайти роботу</a>
+            <a href="/createVacancyPage" class="nav-button">Розмістити вакансію</a>
+        </nav>
     </div>
-    <div th:case="*">
-        Vacancies:
-        <div th:each="vacancy:${vacancyList}">
+</header>
 
-            <div th:text="${vacancy.getId()}"></div>
+<main>
+    <section class="page-header">
+        <div class="container">
+            <h1 th:if="${keyword}" th:text="'Результати пошуку: ' + ${keyword}"></h1>
+            <h1 th:unless="${keyword}">Всі актуальні вакансії</h1>
 
-            <div th:text="${vacancy + ' ' + vacancy.getId()}"></div>
-            <form th:action="@{/deleteVacancy/{id}(id=${vacancy.id})}" method="post">
-                <button type="submit">Delete</button>
+            <form action="/searchVacancies" method="get" class="search-bar">
+                <input type="text" name="keyword" placeholder="Пошук за назвою, навичками..." th:value="${keyword}"/>
+                <button type="submit">Пошук</button>
             </form>
+        </div>
+    </section>
 
-            <form th:action="@{/editVacancy/{id}(id=${vacancy.id})}" method="get">
-                <button type="submit">Edit</button>
-            </form>
+    <section class="vacancy-list-container">
+        <div class="container">
+
+            <div th:if="${#lists.isEmpty(vacancyList)}" class="no-vacancies">
+                <h2>На жаль, за вашим запитом нічого не знайдено.</h2>
+                <p>Спробуйте змінити пошуковий запит або перегляньте всі вакансії пізніше.</p>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(vacancyList)}">
+                <div class="vacancy-card" th:each="vacancy : ${vacancyList}">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="vacancy-title" th:text="${vacancy.nameOfVacancy}">Назва вакансії</h3>
+                            <div class="vacancy-details">
+                                <span th:text="${vacancy.location}">📍 Локація</span>
+                                <span th:text="'💼 ' + ${vacancy.experience}">Досвід</span>
+                                <span th:switch="${vacancy.employmentType}">
+    <span th:case="'Remote'" class="badge remote">🕒 Віддалено</span>
+    <span th:case="'Full-time'" class="badge full-time">🕒 Повний день</span>
+    <span th:case="'Part-time'" class="badge part-time">🕒 Неповний день</span>
+    <span th:case="'Contract'" class="badge contract">🕒 Контракт</span>
+    <span th:case="*" class="badge" th:text="'🕒 ' + ${vacancy.employmentType}"></span>
+</span>
+                            </div>
+                        </div>
+                        <div class="vacancy-salary" th:text="${vacancy.salary} + ' грн'">
+                            25000 грн
+                        </div>
+                    </div>
+
+                    <p class="vacancy-description" th:text="${vacancy.description}">
+                        Короткий опис вакансії...
+                    </p>
+
+                    <div class="card-actions">
+                        <a th:href="@{/editVacancy/{id}(id=${vacancy.id})}" class="action-btn edit-btn">Редагувати</a>
+                        <form th:action="@{/deleteVacancy/{id}(id=${vacancy.id})}" method="post" style="margin: 0;">
+                            <button type="submit" class="delete-btn">Видалити</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 WorkFinder. Усі права захищено.</p>
     </div>
-</div>
-
-<form action="/createVacancy" method="post">
-    <label>
-        Назва вакансії
-        <input name="nameOfVacancy" type="text" required maxlength="200" />
-    </label>
-
-    <label>
-        Вимоги
-        <textarea name="requirements" rows="4" maxlength="2000"></textarea>
-    </label>
-
-    <label>
-        Зарплата (ціле число)
-        <input name="salary" type="number" step="1" min="0" />
-    </label>
-
-    <label>
-        Локація
-        <input name="location" type="text" maxlength="200" />
-    </label>
-
-    <label>
-        Тип зайнятості
-        <select name="employmentType">
-            <option value="">-- оберіть --</option>
-            <option value="Full-time">Full-time</option>
-            <option value="Part-time">Part-time</option>
-            <option value="Remote">Remote</option>
-            <option value="Contract">Contract</option>
-            <option value="Internship">Internship</option>
-        </select>
-    </label>
-
-    <label>
-        Досвід
-        <select name="experience">
-            <option value="">-- оберіть --</option>
-            <option value="No experience">Без досвіду</option>
-            <option value="1-2 years">1-2 роки</option>
-            <option value="3-5 years">3-5 років</option>
-            <option value="5+ years">5+ років</option>
-        </select>
-    </label>
-
-    <label>
-        Опис
-        <textarea name="description" rows="6" maxlength="5000"></textarea>
-    </label>
-
-    <button type="submit">Save</button>
-</form>
-
-
-<form action="/searchVacancies" method="get">
-    <input type="text" name="keyword" placeholder="Пошук вакансій..."
-           th:value="${keyword}" />
-    <button type="submit">Пошук</button>
-</form>
-
+</footer>
 
 </body>
 </html>
